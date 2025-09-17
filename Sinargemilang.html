@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Sinar Gemilang - Formulir Pengajuan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 90%;
+            text-align: left;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        p.description {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 12px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            font-size: 0.95em;
+            color: #007bff;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: center;
+        }
+
+        /* Style untuk pesan error */
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* Style untuk hasil perhitungan */
+        #totalHarga {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #28a745;
+            text-align: center;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p.description {
+                font-size: 0.9em;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="number"] {
+                font-size: 0.95em;
+            }
+
+            button[type="submit"] {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Formulir Pengajuan ke PT Sinar Gemilang</h1>
+        <p class="description">Silakan isi formulir di bawah ini untuk pengajuan produk.</p>
+
+        <form id="formPengajuan" action="#" method="POST">
+            <div class="form-group">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+                <div class="error-message" id="namaError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="noHP">No. HP:</label>
+                <input type="tel" id="noHP" name="noHP" placeholder="Masukkan nomor HP Anda" required>
+                <div class="error-message" id="noHPError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="jumlahBotol">Jumlah Kemasan Botol (CTN/Karton):</label>
+                <input type="number" id="jumlahBotol" name="jumlahBotol" value="0" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="jumlahPouch">Jumlah Kemasan Pouch/Refill (CTN/Karton):</label>
+                <input type="number" id="jumlahPouch" name="jumlahPouch" value="0" min="0">
+            </div>
+
+            <button type="button" onclick="hitungTotal()">Hitung Total Harga</button>
+            <div id="totalHarga"></div>
+
+            <button type="submit">Kirim Pengajuan</button>
+        </form>
+
+        <a href="index.html" class="back-link">← Kembali ke Halaman Utama</a>
+
+        <footer>
+            &copy; 2025 PT Sinar Gemilang. Semua Hak Dilindungi.
+        </footer>
+    </div>
+
+    <script>
+        function hitungTotal() {
+            const hargaBotol = 183000;
+            const hargaPouch = 174800;
+            const jumlahBotol = parseInt(document.getElementById('jumlahBotol').value) || 0;
+            const jumlahPouch = parseInt(document.getElementById('jumlahPouch').value) || 0;
+
+            const total = (hargaBotol * jumlahBotol) + (hargaPouch * jumlahPouch);
+            document.getElementById('totalHarga').innerText = 'Total Harga: Rp ' + total.toLocaleString();
+        }
+
+        document.getElementById('formPengajuan').addEventListener('submit', function (event) {
+            // Validasi sederhana (bisa dikembangkan lebih lanjut)
+            const nama = document.getElementById('nama').value;
+            const email = document.getElementById('email').value;
+            const noHP = document.getElementById('noHP').value;
+
+            if (!nama || !email || !noHP) {
+                alert('Harap isi semua field yang wajib.');
+                event.preventDefault(); // Mencegah form dikirim
+            }
+        });
+    </script>
+</body>
+
+</html>
